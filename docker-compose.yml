@@ -1,0 +1,26 @@
+version: '2'
+services:
+
+  fibonacci:
+    build: ./fibonacci-calculator
+    expose:
+      - "4567"
+    volumes:
+      - ./fibonacci-calculator:/opt/fibonacci-calculator
+
+  prime:
+    build: ./prime-calculator
+    expose:
+      - "4567"
+    volumes:
+      - ./prime-calculator:/opt/prime-calculator
+
+  web:
+    build: ./web
+    ports:
+      - "5678:4567"
+    links:
+      - "fibonacci"
+      - "prime"
+    volumes:
+      - ./web:/opt/fibonacci-web
